@@ -1,4 +1,5 @@
 import { UserDatabase } from "../database/useDatabaseClass/UserDatabase"
+import { createUserInputDTO, createUserOutputDTO } from "../dtos/createUser.dto"
 import { BadRequestError } from "../errors/BadRequestError"
 import { ConflictError } from "../errors/ConflictError"
 import { UnprocessableEntityError } from "../errors/UnprocessableEntityError"
@@ -9,10 +10,10 @@ import { USER_ROLES } from "../types/type"
 export class UserBusiness {
 
     constructor(
-        private userDatabase: UserDatabase = new UserDatabase()
+        private userDatabase: UserDatabase
     ){}
     
-    public createUser = async (input: any) => {
+    public createUser = async (input: createUserInputDTO): Promise<createUserOutputDTO> => {
         
         const {
             id,
@@ -20,35 +21,6 @@ export class UserBusiness {
             email,
             password
         } = input
-
-        const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|[a-zA-Z]{2})$/
-        const regexLetter = /[a-zA-Z]/
-        const regexNumber = /(?=.*\d)/
-        const regexSpecialCharacter = /[!#$%&@§*=+|]/
-
-        Object.entries({id, name, email, password}).forEach((property) => {
-            const [key, value] = property
-
-            if(typeof(value) !== "string"){
-                throw new BadRequestError(`Era esperado que a propriedade '${key}' fosse uma string, porém o valor recebido foi do tipo '${typeof value}.'`)
-            }else if(value.length === 0){
-                throw new UnprocessableEntityError(`A propriedade '${key}' não pode ser vazia.`)
-            }
-        })
-
-        if(!regexEmail.test(email)){
-            throw new UnprocessableEntityError(`O email informado é inválido.`)
-        }
-
-        if(!regexLetter.test(password)){
-            throw new BadRequestError(`Sua senha precisa ter pelo menos uma letra.'`)
-        }
-        if(!regexNumber.test(password)){
-            throw new BadRequestError(`Sua senha precisa ter pelo menos um número.'`)
-        }
-        if(!regexSpecialCharacter.test(password)){
-            throw new BadRequestError(`Sua senha precisa ter pelo menos um desse caracteres especiais: { '!', '#', '$', '%', '&', '@', '§', '*', '=', '+', '|' }.`)
-        }
 
         const [idExist] = await this.userDatabase.findUser('id', id)
 
@@ -81,5 +53,9 @@ export class UserBusiness {
                 created_at: newUser.getCreatedAt()
             }
         )
+
+        return {token: "um token jwt"}
     }
+
+    
 }
