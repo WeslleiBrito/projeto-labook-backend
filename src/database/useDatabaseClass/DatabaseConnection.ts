@@ -1,11 +1,13 @@
 import {knex} from 'knex'
+import dontenv from 'dotenv'
 
+dontenv.config()
 export abstract class DatabaseConnection{
     protected static connection = knex(
         {
             client: "sqlite3",
             connection: {
-                filename: "src/database/baseDB/database.db"
+                filename: process.env.DB_FILE_PATH as string
             },
             useNullAsDefault: true,
             pool: {
