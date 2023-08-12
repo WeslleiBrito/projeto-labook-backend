@@ -1,7 +1,6 @@
 import z from 'zod'
 
 export interface createUserInputDTO {
-    id: string,
     name: string,
     email: string,
     password: string
@@ -17,15 +16,6 @@ const regexSpecialCharacter = /[!#$%&@§*=+|]/
 
 export const createUserShema = z.object(
     {
-        id: z.string(
-            {
-                required_error: "O 'id' é obrigatório.",
-                invalid_type_error: "O tipo informado é inválido, era esperado que o 'id' fosse uma string."
-            }
-        )
-        .min(4, {message: "O 'id' precisa ter pelo menos 4 caracteres."})
-        .max(4, {message: "O 'id' não pode ter mais que 4 caracteres."}),
-
         name: z.string(
             {
                 required_error: "O 'name' é obrigatório.",

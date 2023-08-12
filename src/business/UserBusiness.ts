@@ -1,32 +1,25 @@
 import { UserDatabase } from "../database/useDatabaseClass/UserDatabase"
 import { createUserInputDTO, createUserOutputDTO } from "../dtos/createUser.dto"
-import { BadRequestError } from "../errors/BadRequestError"
 import { ConflictError } from "../errors/ConflictError"
-import { UnprocessableEntityError } from "../errors/UnprocessableEntityError"
 import { User } from "../models/User"
+import { IdGenerator } from "../services/IdGenerator"
 import { USER_ROLES } from "../types/type"
 
 
 export class UserBusiness {
 
     constructor(
-        private userDatabase: UserDatabase
+        private userDatabase: UserDatabase,
+        private idGenerator: IdGenerator
     ){}
     
     public createUser = async (input: createUserInputDTO): Promise<createUserOutputDTO> => {
         
         const {
-            id,
             name,
             email,
             password
         } = input
-
-        const [idExist] = await this.userDatabase.findUser('id', id)
-
-        if(idExist){
-            throw new ConflictError('O id informado já exite em nossa base de dados!')
-        }
 
         const [emailExist] = await this.userDatabase.findUser('email', email)
 
@@ -34,6 +27,8 @@ export class UserBusiness {
             throw new ConflictError('O email informado já exite em nossa base de dados!')
         }
 
+        const id = this.idGenerator.generate()
+        
         const newUser = new User(
             id,
             name,

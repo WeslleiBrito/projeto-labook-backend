@@ -15,7 +15,6 @@ export class UserController {
             
             const input: createUserInputDTO = createUserShema.parse(
                 {
-                    id: req.body.id,
                     name: req.body.name,
                     email: req.body.email,
                     password: req.body.password
