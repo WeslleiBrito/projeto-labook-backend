@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import { userRouter } from './router/userRouter'
 import dontenv from 'dotenv'
+import { postRouter } from './router/postRouter'
 
 dontenv.config()
 
@@ -14,3 +15,4 @@ app.listen(Number(process.env.PORT || 3003), () => {
 })
 
 app.use('/users', userRouter)
+app.use('/posts', postRouter)
