@@ -6,7 +6,7 @@ export class UserDatabase extends DatabaseConnection{
 
     public static TABLE_USERS = "users"
 
-    public createUser = async (input: UserDB): Promise<number> => {
+    public signup = async (input: UserDB): Promise<number> => {
         
         const [create] = await DatabaseConnection.connection(UserDatabase.TABLE_USERS).insert(input)
 
