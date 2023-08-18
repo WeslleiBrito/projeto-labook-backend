@@ -15,17 +15,17 @@ export class PostController {
     public createPost = async (req: Request, res: Response) => {
         
         try {
-            
+
             const input: InputCreatePostDTO = InputCreatePostSchema.parse(
                 {
                     content: req.body.content,
-                    creatorId: req.body.creatorId
+                    token: req.headers.authorization
                 }
             )
 
             await this.postBusiness.createPost(input)
 
-            res.status(201).send("Cadastro efetuado com sucesso!")
+            res.status(201)
 
         } catch (error) {
             if(error instanceof ZodError){
