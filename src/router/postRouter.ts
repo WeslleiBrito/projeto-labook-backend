@@ -17,3 +17,4 @@ const postController = new PostController(new PostBusiness(
 
 
 postRouter.post('/', postController.createPost)
+postRouter.get('/', postController.getPosts)

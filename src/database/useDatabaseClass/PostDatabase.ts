@@ -1,4 +1,5 @@
 
+import { GetPostDB } from "../../dtos/getPost.dto";
 import { PostDB } from "../../types/type";
 import { DatabaseConnection } from "./DatabaseConnection";
 
@@ -11,6 +12,22 @@ export class PostDatabase extends DatabaseConnection{
         await PostDatabase.connection(PostDatabase.TABLE_POSTS).insert(input)
     }
 
+    public getPosts = async (): Promise<GetPostDB[]> => {
+        
+        const posts: GetPostDB[] = await DatabaseConnection.connection("posts").innerJoin("users", "users.id", "posts.creator_id")
+        .select(
+            "posts.id AS id_post",
+            "creator_id",
+            "content",
+            "likes",
+            "dislikes",
+            "posts.created_at",
+            "update_at",
+            "users.name"
+        )
+
+        return posts
+    }
     public findPost = async (colunm?: string, value?: string | number | Array<string | number>): Promise<PostDB[]> => {
         
         if(value && colunm){

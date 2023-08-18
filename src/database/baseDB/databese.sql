@@ -39,4 +39,6 @@ SELECT * FROM likes_dislikes;
 
 DROP TABLE IF EXISTS likes_dislikes;
 
-SELECT users.id as "Id usuário", users.name as "Nome" FROM posts INNER JOIN users ON posts.creator_id = users.id;
+SELECT * FROM posts INNER JOIN users ON posts.creator_id = users.id;
+SELECT posts.id as "id_user", post
+ FROM posts INNER JOIN users ON posts.creator_id = users.id;

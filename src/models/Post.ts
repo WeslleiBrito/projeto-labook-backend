@@ -6,7 +6,8 @@ export class Post {
         private content: string,
         private likes: number,
         private dislikes: number,
-        private createdAt: string
+        private createdAt: string,
+        private updatedAt: string
     ) { }
 
     public getId = (): string => {
@@ -29,6 +30,10 @@ export class Post {
         return this.createdAt
     }
 
+    public getUpdatedAt = (): string => {
+        return this.updatedAt
+    }
+
     public setContent = (newContent: string): void => {
         this.content = newContent
     }
@@ -37,5 +42,9 @@ export class Post {
     }
     public setDislikes = (newDislike: number): void => {
         this.dislikes = newDislike
+    }
+
+    public setUpdatedAt = (newUpdatedAt: string): void => {
+        this.updatedAt = newUpdatedAt
     }
 }

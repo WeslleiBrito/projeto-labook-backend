@@ -1,3 +1,5 @@
+import { Post } from "../models/Post"
+
 export interface UserDB {
     id: string,
     name: string,
@@ -37,3 +39,5 @@ export interface TokenPayload {
     name: string,
     role: USER_ROLES
 }
+
+
