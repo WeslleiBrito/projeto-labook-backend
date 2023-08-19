@@ -1,4 +1,5 @@
 
+import { InputDeletePostDTO } from "../../dtos/deletePost.dto";
 import { InputEditPostDTO } from "../../dtos/editPost.dto";
 import { GetPostDB } from "../../dtos/getPost.dto";
 import { PostDB } from "../../types/type";
@@ -48,6 +49,12 @@ export class PostDatabase extends DatabaseConnection{
         await PostDatabase.connection(PostDatabase.TABLE_POSTS).update({content}).where({id})
     }
 
+    public deletePost = async (input: InputDeletePostDTO) => {
+        const {id} = input
+
+        await PostDatabase.connection(PostDatabase.TABLE_POSTS).del().where({id})
+        
+    }
     
 }
 
