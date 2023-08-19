@@ -1,6 +1,7 @@
 import { InputCreatePostDB, PostDatabase } from "../database/useDatabaseClass/PostDatabase";
 import { UserDatabase } from "../database/useDatabaseClass/UserDatabase";
 import { InputCreatePostDTO } from "../dtos/createPost.dto";
+import { InputEditPostDTO } from "../dtos/editPost.dto";
 import { InputGetPostsDTO, OutputGetPost } from "../dtos/getPost.dto";
 import { NotFoundError } from "../errors/NotFoundError";
 import { UnauthorizedError } from "../errors/UnauthorizedError";
@@ -89,4 +90,24 @@ export class PostBusiness {
 
         return posts
     }
+
+    public editPost = async (input: InputEditPostDTO) => {
+        const {token, id} = input
+
+        const tokenIsValid = this.tokenManager.validateToken(token)
+
+        if(!tokenIsValid){
+            throw new UnauthorizedError("Token inválido.")
+        }
+
+        const [postExist] = await this.postDatabase.findPost('id', id)
+
+        if(!postExist){
+            throw new NotFoundError("O id informado não existe.")
+        }
+
+        await this.postDatabase.editPost(input)
+        
+    }
+    
 }

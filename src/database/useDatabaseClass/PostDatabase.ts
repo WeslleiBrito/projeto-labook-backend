@@ -1,4 +1,5 @@
 
+import { InputEditPostDTO } from "../../dtos/editPost.dto";
 import { GetPostDB } from "../../dtos/getPost.dto";
 import { PostDB } from "../../types/type";
 import { DatabaseConnection } from "./DatabaseConnection";
@@ -28,6 +29,7 @@ export class PostDatabase extends DatabaseConnection{
 
         return posts
     }
+
     public findPost = async (colunm?: string, value?: string | number | Array<string | number>): Promise<PostDB[]> => {
         
         if(value && colunm){
@@ -38,6 +40,15 @@ export class PostDatabase extends DatabaseConnection{
 
         return await DatabaseConnection.connection(PostDatabase.TABLE_POSTS) as PostDB[]
     }
+
+    public editPost = async (input: InputEditPostDTO) => {
+        
+        const {id, content} = input
+
+        await PostDatabase.connection(PostDatabase.TABLE_POSTS).update({content}).where({id})
+    }
+
+    
 }
 
 
