@@ -3,10 +3,10 @@ import { InputDeletePostDTO } from "../../dtos/deletePost.dto";
 import { InputEditPostDTO } from "../../dtos/editPost.dto";
 import { GetPostDB } from "../../dtos/getPost.dto";
 import { PostDB } from "../../types/type";
-import { DatabaseConnection } from "./DatabaseConnection";
+import { BaseDatabase } from "./BaseDatabase";
 
 
-export class PostDatabase extends DatabaseConnection{
+export class PostDatabase extends BaseDatabase{
     public static TABLE_POSTS = "posts"
 
     public createPost = async (input: InputCreatePostDB) => {
@@ -16,7 +16,7 @@ export class PostDatabase extends DatabaseConnection{
 
     public getPosts = async (): Promise<GetPostDB[]> => {
         
-        const posts: GetPostDB[] = await DatabaseConnection.connection("posts").innerJoin("users", "users.id", "posts.creator_id")
+        const posts: GetPostDB[] = await BaseDatabase.connection("posts").innerJoin("users", "users.id", "posts.creator_id")
         .select(
             "posts.id AS id_post",
             "creator_id",
@@ -34,12 +34,12 @@ export class PostDatabase extends DatabaseConnection{
     public findPost = async (colunm?: string, value?: string | number | Array<string | number>): Promise<PostDB[]> => {
         
         if(value && colunm){
-            const result: PostDB[] = await DatabaseConnection.connection(PostDatabase.TABLE_POSTS).whereIn(colunm, [value])
+            const result: PostDB[] = await BaseDatabase.connection(PostDatabase.TABLE_POSTS).whereIn(colunm, [value])
 
             return result
         }
 
-        return await DatabaseConnection.connection(PostDatabase.TABLE_POSTS) as PostDB[]
+        return await BaseDatabase.connection(PostDatabase.TABLE_POSTS) as PostDB[]
     }
 
     public editPost = async (input: InputEditPostDTO) => {

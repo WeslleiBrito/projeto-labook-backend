@@ -2,7 +2,8 @@ import {knex} from 'knex'
 import dontenv from 'dotenv'
 
 dontenv.config()
-export abstract class DatabaseConnection{
+
+export abstract class BaseDatabase{
     protected static connection = knex(
         {
             client: "sqlite3",
