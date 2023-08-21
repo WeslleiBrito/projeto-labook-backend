@@ -21,7 +21,7 @@ export class LikeDislikeBusiness {
         const [postExist] = await this.postDatabase.findPost("id", id)
 
         if(!postExist){
-            throw new NotFoundError("O post não encontrado!")
+            throw new NotFoundError("O post não foi encontrado!")
         }
 
         const tokenIsValid = this.tokenManager.validateToken(token)
@@ -52,7 +52,7 @@ export class LikeDislikeBusiness {
 
             }else{
 
-                await this.likeDislikeDatabase.updateLikeDislike({postId: likeDislikeExist.post_id, userId: likeDislikeExist.user_id, like: likeDislikeExist.like === 1 ? 0 : 1})
+                await this.likeDislikeDatabase.updateLikeDislike({postId: likeDislikeExist.post_id, userId: likeDislikeExist.user_id, like: newLike})
             }
 
         }
