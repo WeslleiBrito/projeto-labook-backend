@@ -1,4 +1,4 @@
-import { UserDatabase } from "../database/useDatabaseClass/UserDatabase"
+import { UserDatabase } from "../database/UserDatabase"
 import { inputLoginDTO, outputLoginDTO } from "../dtos/login.dto"
 import { createUserInputDTO, createUserOutputDTO } from "../dtos/signup.dto"
 import { ConflictError } from "../errors/ConflictError"

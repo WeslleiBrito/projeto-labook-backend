@@ -1,8 +1,7 @@
-
-import { InputDeletePostDTO } from "../../dtos/deletePost.dto";
-import { InputEditPostDTO } from "../../dtos/editPost.dto";
-import { GetPostDB } from "../../dtos/getPost.dto";
-import { PostDB } from "../../types/type";
+import { InputDeletePostDTO } from "../dtos/deletePost.dto";
+import { InputEditPostDTO } from "../dtos/editPost.dto";
+import { GetPostDB } from "../dtos/getPost.dto";
+import { PostDB } from "../types/type";
 import { BaseDatabase } from "./BaseDatabase";
 
 

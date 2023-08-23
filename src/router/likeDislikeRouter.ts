@@ -1,9 +1,9 @@
 import express from "express"
 import { LikeDislikeController } from "../controller/LikeDislikeController"
 import { LikeDislikeBusiness } from "../business/LikeDislikeBusiness"
-import { LikeDislikeDatabase } from "../database/useDatabaseClass/LikeDislikeDatabase"
 import { TokenManager } from "../services/TokenManager"
-import { PostDatabase } from "../database/useDatabaseClass/PostDatabase"
+import { LikeDislikeDatabase } from "../database/LikeDislikeDatabase"
+import { PostDatabase } from "../database/PostDatabase"
 
 
 export const likeDislikeRouter = express.Router()

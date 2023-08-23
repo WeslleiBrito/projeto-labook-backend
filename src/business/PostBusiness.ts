@@ -1,5 +1,5 @@
-import { InputCreatePostDB, PostDatabase } from "../database/useDatabaseClass/PostDatabase";
-import { UserDatabase } from "../database/useDatabaseClass/UserDatabase";
+import { InputCreatePostDB, PostDatabase } from "../database/PostDatabase";
+import { UserDatabase } from "../database/UserDatabase";
 import { InputCreatePostDTO } from "../dtos/createPost.dto";
 import { InputDeletePostDTO } from "../dtos/deletePost.dto";
 import { InputEditPostDTO } from "../dtos/editPost.dto";

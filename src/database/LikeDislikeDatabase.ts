@@ -1,4 +1,4 @@
-import { OutputLikesDislikesDB } from "../../dtos/createlikeDislike.dto";
+import { OutputLikesDislikesDB } from "../dtos/createlikeDislike.dto";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class LikeDislikeDatabase extends BaseDatabase {

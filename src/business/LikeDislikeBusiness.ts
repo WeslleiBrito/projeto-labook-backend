@@ -1,5 +1,5 @@
-import { LikeDislikeDatabase } from "../database/useDatabaseClass/LikeDislikeDatabase";
-import { PostDatabase } from "../database/useDatabaseClass/PostDatabase";
+import { LikeDislikeDatabase } from "../database/LikeDislikeDatabase";
+import { PostDatabase } from "../database/PostDatabase";
 import { InputLikeDislikeDTO } from "../dtos/createlikeDislike.dto";
 import { ConflictError } from "../errors/ConflictError";
 import { NotFoundError } from "../errors/NotFoundError";

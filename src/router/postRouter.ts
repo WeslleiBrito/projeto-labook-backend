@@ -1,10 +1,10 @@
 import express from "express"
 import { PostController } from "../controller/PostController"
 import { PostBusiness } from "../business/PostBusiness"
-import { PostDatabase } from "../database/useDatabaseClass/PostDatabase"
-import { UserDatabase } from "../database/useDatabaseClass/UserDatabase"
 import { IdGenerator } from "../services/IdGenerator"
 import { TokenManager } from "../services/TokenManager"
+import { PostDatabase } from "../database/PostDatabase"
+import { UserDatabase } from "../database/UserDatabase"
 
 export const postRouter = express.Router()
 

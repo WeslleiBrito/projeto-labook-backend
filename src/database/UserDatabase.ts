@@ -1,4 +1,5 @@
-import { UserDB } from "../../types/type";
+
+import { UserDB } from "../types/type";
 import { BaseDatabase } from "./BaseDatabase";
 
 

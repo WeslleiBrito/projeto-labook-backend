@@ -53,7 +53,7 @@ export class PostController {
 
             const post: OutputGetPost[] = await this.postBusiness.getPosts(input)
 
-            res.status(201).send(post)
+            res.status(200).send(post)
 
         } catch (error) {
             if(error instanceof ZodError){
