@@ -38,21 +38,41 @@ export class LikeDislikeBusiness {
 
         const likeDislikeExist = await this.likeDislikeDatabase.findLikeDislike(id, userId)
 
+        const column = like ? "likes": "dislikes"
+
+        const idPost = postExist.id
+
         if(!likeDislikeExist){
+            
+            const value = like ? postExist.likes + 1 : postExist.dislikes + 1
 
             await this.likeDislikeDatabase.createLikeDislike({postId: id, userId, like: like ? 1 : 0})
+
+            await this.postDatabase.editLikeDislikePost({column, id: idPost, value})
 
         }else{
 
             const newLike = like ? 1 : 0
 
             if(newLike === likeDislikeExist.like){
-
                 await this.likeDislikeDatabase.deleteLikeDislike({post_id: likeDislikeExist.post_id, user_id: tokenIsValid.id})
+
+                const value = like ? postExist.likes - 1 : postExist.dislikes - 1
+
+                await this.postDatabase.editLikeDislikePost({column, id: idPost, value})
 
             }else{
 
                 await this.likeDislikeDatabase.updateLikeDislike({postId: likeDislikeExist.post_id, userId: likeDislikeExist.user_id, like: newLike})
+
+                if(newLike){
+                    await this.postDatabase.editLikeDislikePost({column: "likes", id, value: postExist.likes + 1})
+                    await this.postDatabase.editLikeDislikePost({column: "dislikes", id, value: postExist.dislikes - 1})
+                }else{
+                    await this.postDatabase.editLikeDislikePost({column: "likes", id, value: postExist.likes - 1})
+                    await this.postDatabase.editLikeDislikePost({column: "dislikes", id, value: postExist.dislikes + 1})
+                }
+
             }
 
         }

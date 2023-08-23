@@ -29,8 +29,6 @@ export class LikeDislikeDatabase extends BaseDatabase {
 
     public updateLikeDislike = async (input: InputCreateUpdateLikeDislike) => {
         
-        console.log(input)
-        
         await LikeDislikeDatabase.connection(LikeDislikeDatabase.TABLE_LIKES_DISLIKES).update(
             {like: input.like}
         ).where({post_id: input.postId}).andWhere({user_id: input.userId})

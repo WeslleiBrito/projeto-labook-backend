@@ -49,6 +49,18 @@ export class PostDatabase extends BaseDatabase{
         await PostDatabase.connection(PostDatabase.TABLE_POSTS).update({content}).where({id})
     }
 
+    public editLikeDislikePost = async (input: InputEditLikeDislike) => {
+        
+        const {column, value, id} = input
+
+        if(column === "likes"){
+            await PostDatabase.connection(PostDatabase.TABLE_POSTS).update({likes: value}).where({id})
+        }else{
+            await PostDatabase.connection(PostDatabase.TABLE_POSTS).update({dislikes: value}).where({id})
+        }
+
+        
+    }
     public deletePost = async (input: InputDeletePostDTO) => {
         const {id} = input
 
@@ -63,4 +75,10 @@ export interface InputCreatePostDB {
     id: string,
     creator_id: string,
     content: string
+}
+
+interface InputEditLikeDislike {
+    id: string
+    column: "likes" | "dislikes" 
+    value: number
 }
