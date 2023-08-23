@@ -1,3 +1,4 @@
+import { USER_ROLES } from "../types/type"
 
 export class User {
     constructor(
@@ -5,7 +6,7 @@ export class User {
         private name: string,
         private email: string,
         private password: string,
-        private role: string,
+        private role: USER_ROLES,
         private createdAt: string
     ) { }
 
@@ -21,7 +22,7 @@ export class User {
     public getPassword = (): string => {
         return this.password
     }
-    public getRole = (): string => {
+    public getRole = (): USER_ROLES => {
         return this.role
     }
     public getCreatedAt = (): string => {
@@ -35,7 +36,7 @@ export class User {
         this.password = newPassword
     }
 
-    public setRole = (newRole: string): void => {
+    public setRole = (newRole: USER_ROLES): void => {
         this.role = newRole
     }
 

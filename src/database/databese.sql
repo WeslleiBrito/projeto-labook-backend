@@ -1,4 +1,4 @@
--- Active: 1690292793040@@127.0.0.1@3306
+-- Active: 1691348411366@@127.0.0.1@3306
 
 CREATE TABLE
     IF NOT EXISTS users (
@@ -38,3 +38,7 @@ CREATE TABLE
 SELECT * FROM likes_dislikes;
 
 DROP TABLE IF EXISTS likes_dislikes;
+
+SELECT * FROM posts INNER JOIN users ON posts.creator_id = users.id;
+SELECT posts.id as "id_user", post
+ FROM posts INNER JOIN users ON posts.creator_id = users.id;

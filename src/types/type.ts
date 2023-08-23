@@ -1,3 +1,5 @@
+import { Post } from "../models/Post"
+
 export interface UserDB {
     id: string,
     name: string,
@@ -16,16 +18,7 @@ export interface PostDB {
     created_at: string
 }
 
-export interface LikesDislikesDB {
-    user_id: string,
-    post_id: string,
-    like: LIKE_DISLIKE
-}
 
-export enum LIKE_DISLIKE {
-    LIKE = 1,
-    DISLIKE = 0
-}
 
 export enum USER_ROLES {
     NORMAL = "NORMAL",
@@ -37,3 +30,5 @@ export interface TokenPayload {
     name: string,
     role: USER_ROLES
 }
+
+
