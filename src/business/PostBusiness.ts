@@ -131,7 +131,7 @@ export class PostBusiness {
             throw new UnauthorizedError("Token inválido.")
         }
 
-        if(tokenIsValid.id !== postExist.creator_id){
+        if(tokenIsValid.id !== postExist.creator_id && tokenIsValid.role !== "ADMIN"){
             throw new UnauthorizedError("O usuário não tem permição para deletar o poste.")
         }
 
