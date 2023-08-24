@@ -53,7 +53,7 @@
 
 ## Funcionalidades
 ### Signup
-Cria um novo usuário
+Cria um novo usuário<br>
 *Dados obrigatórios:* [post] http://localhost:3003/users/signup
 ```json
     {
