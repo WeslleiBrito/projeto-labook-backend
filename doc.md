@@ -56,7 +56,7 @@
 Cria um novo usuário
 *Dados obrigatórios:* [post] http://localhost:3003/users/signup
 ```json
-    body: {
+    {
         "name": "string",
         "email": "string",
         "password": "string"
