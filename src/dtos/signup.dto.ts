@@ -10,9 +10,6 @@ export interface createUserOutputDTO {
     token: string
 }
 
-const regexLetter = /[a-zA-Z]/
-const regexNumber = /(?=.*\d)/
-const regexSpecialCharacter = /[!#$%&@§*=+|]/
 
 export const createUserShema = z.object(
     {
@@ -34,9 +31,6 @@ export const createUserShema = z.object(
                 required_error: "O 'password' é obrigatório.",
                 invalid_type_error: "O tipo informado é inválido, era esperado que o 'password' fosse uma string."
             }
-        ).min(6, "O 'password' precisa ter pelo menos 6 caracteres.")
-        .regex(regexLetter, {message: "Sua senha precisa ter pelo menos uma letra."})
-        .regex(regexNumber, {message: "Sua senha precisa ter pelo menos um número."})
-        .regex(regexSpecialCharacter, {message: "Sua senha precisa ter pelo menos um desse caracteres especiais: { '!', '#', '$', '%', '&', '@', '§', '*', '=', '+', '|' }."})
+        )
     }
 ).transform(data => data as createUserInputDTO)
