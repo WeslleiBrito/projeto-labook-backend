@@ -6,10 +6,12 @@
 3. [Detalhes do Servidor](#detalhes-do-servidor)
 4. [Autenticação](#autenticação)
 5. [Endpoints](#endpoints)
-5.1 [POST/signup](#1-post-signup)
+5.1 [POST /signup](#1-post-signup)
 5.2 [POST /login](#2-post-login)
 5.3 [POST /create-post](#3-post-create-post)
-5.4 []
+5.4 [POST /edit-post](#4-edit-post-put-postsid)
+5.5 [DELETE /delete-post](#5-delete-post-delete-postsid)
+5.5 [POST /like-dislike](#6-like-or-dislike-post-postsidlike)
 ## Resumo
 Bem-vindo à documentação da API do Labook! A API labook-backend foi projetada para fornecer um ambiente de comunicação com um banco de dados por meio de seus endpoints exclusivos. Inspirada no conceito de rede social, esta API permite que qualquer pessoa se cadastre, crie posts e interaja com as publicações de outros usuários de forma intuitiva e segura.
 
@@ -86,6 +88,7 @@ Cria uma nova conta de usuário.
 __*Observação: Todos os usuários criados possuem os privilégios de um usuário padrão(normal), o que lhes permite criar postagens, visualizar as postagens de outros usuários e interagir ao dar likes ou dislikes.*__
 
 **Corpo da Solicitação [body]:**
+Input:
 ```json
 {
   "name": "seu-nome",
@@ -93,23 +96,29 @@ __*Observação: Todos os usuários criados possuem os privilégios de um usuár
   "password": "senha123"
 }
 ```
-
+Output: 
+```Json
+{
+  "token": "um token jwt"
+}
+```
 ### 2. Login: `[POST] /users/login`
 
 Realiza o login e recebe um token de autenticação.
 
 **Corpo da Solicitação [body]:**
+
+Input:
 ```json
 {
   "email": "email@exemplo.com",
   "password": "senha123"
 }
 ```
-
-**Resposta Bem-sucedida:**
-```json
+Output:
+```Json
 {
-  "token": "seu_token_de_autenticacao"
+  "token": "um token jwt"
 }
 ```
 
@@ -121,12 +130,18 @@ Cria um novo post.
 - headers.authorization = "token jwt"
 
 **Corpo da Solicitação [body]:**
+Input:
 ```json
 {
   "content": "Conteúdo do Post"
 }
 ```
-
+Output:
+```Json
+{
+  "message": "Post criado com sucesso!"
+}
+```
 ### 4. Edit post: `[PUT] /posts/:id`
 
 Edita um post existente.
@@ -136,21 +151,42 @@ __*Observação: Apenas o proprietário do post consegue fazer edição do conte
 **Cabeçalhos [headers]:**
 - headers.authorization = "token jwt"
 
+**Parâmetros [params]:**
+- `params.id = "id"`
+
 **Corpo da Solicitação [body]:**
+Input:
 ```json
 {
   "content": "Novo Conteúdo do Post"
 }
 ```
-
+Output:
+```Json
+{
+  "message": "Post editado com sucesso!"
+}
+```
 ### 5. Delete post: `[DELETE] /posts/:id`
 
 Exclui um post.
 
 __*Observação: Apenas o proprietário ou um usuário "admin" podem excluir um post.*__
+Input:
+```
+Cabeçalhos [headers]
+headers.authorization = "token jwt"
 
-**Cabeçalhos [headers]:**
-- headers.authorization = "token jwt"
+Parâmetros [params]
+params.id = "id"
+```
+
+Output:
+```json
+{
+  "message": "post deletado"
+}
+```
 
 ### 6. Like or dislike: `[POST] /posts/:id/like`
 
