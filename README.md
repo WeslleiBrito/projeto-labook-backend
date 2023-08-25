@@ -13,7 +13,7 @@
     - <a href="#4-edit-post-put-postsid">PUT /edit-post</a>
     - <a href="#5-delete-post-delete-postsid">DELETE /delete-post</a>
     - <a href="#6-like-or-dislike-post-postsidlike">POST /like-dislike</a>
-    - <a href="#7-get-post-get-posts">GET /get-post</a>
+    - <a href="#7-get-post-get-posts">GET /get-posts</a>
 7. [Pessoas autoras](#pessoas-autoras)
 8. [Contatos](#contatos)
 
