@@ -28,7 +28,7 @@ export class PostController {
 
             await this.postBusiness.createPost(input)
 
-            res.status(201).send({message: "Create Post"})
+            res.status(201).send({message: "Post criado com sucesso."})
 
         } catch (error) {
             if(error instanceof ZodError){
@@ -80,7 +80,7 @@ export class PostController {
             
             await this.postBusiness.editPost(input)
 
-            res.status(201).send("Editado com sucesso!")
+            res.status(201).send("Post editado com sucesso!")
         } catch (error) {
             if(error instanceof ZodError){
                 res.status(400).send(error.issues)

@@ -9,6 +9,7 @@ import { UnauthorizedError } from "../errors/UnauthorizedError";
 import { Post } from "../models/Post";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
+import { USER_ROLES } from "../types/type";
 
 
 export class PostBusiness {
@@ -130,8 +131,8 @@ export class PostBusiness {
         if(!tokenIsValid){
             throw new UnauthorizedError("Token inválido.")
         }
-
-        if(tokenIsValid.id !== postExist.creator_id){
+        
+        if(tokenIsValid.id !== postExist.creator_id && tokenIsValid.role !== USER_ROLES.ADMIN){
             throw new UnauthorizedError("O usuário não tem permição para deletar o poste.")
         }
 
