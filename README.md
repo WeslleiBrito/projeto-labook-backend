@@ -7,12 +7,13 @@
 4. [Detalhes do Servidor](#detalhes-do-servidor)
 5. [Autenticação](#autenticação)
 6. [Endpoints](#endpoints)
-6.1 [POST /signup](#1-signup-post-userssignup)
-6.2 [POST /login](#2-login-post-userslogin)
-6.3 [POST /create-post](#3-create-post-post-posts)
-6.4 [POST /edit-post](#4-edit-post-put-postsid)
-6.5 [DELETE /delete-post](#5-delete-post-delete-postsid)
-6.5 [POST /like-dislike](#6-like-or-dislike-post-postsidlike)
+    - <a href="#1-signup-post-userssignup">POST /signup</a>
+    - <a href="#2-login-post-userslogin">POST /login</a>
+    - <a href="#3-create-post-post-posts">POST /create-post</a>
+    - <a href="#4-edit-post-put-postsid">PUT /edit-post</a>
+    - <a href="#5-delete-post-delete-postsid">DELETE /delete-post</a>
+    - <a href="#6-like-or-dislike-post-postsidlike">POST /like-dislike</a>
+    - <a href="#7-get-post-get-posts">GET /get-posts</a>
 7. [Pessoas autoras](#pessoas-autoras)
 8. [Contatos](#contatos)
 
