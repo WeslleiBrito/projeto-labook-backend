@@ -24,7 +24,9 @@ export class LikeDislikeController {
 
             const output = await this.likeDislikeBusiness.likeDislike(input)
 
-            res.status(201).send(input.like ? "Like" : "Dislike")
+            res.status(201).send({
+                message: input.like ? "Like" : "Dislike"
+            })
 
         } catch (error) {
             if(error instanceof ZodError){
