@@ -216,13 +216,26 @@ __*Caso dê um dislike em um post que tenha dado like, o dislike sobrescreve o l
 Input:
 ```json
 {
-  "content": true or false
+  "like": true
 }
 ```
+Ou:
+```json
+{
+    "like": false
+}
+```
+---
 Output:
 ```json
 {
-  "message": "like" or "dislike"
+  "message": "like"
+}
+```
+Ou:
+```json
+{
+  "message": "dislike"
 }
 ```
 ### 7. Get Post: `[Get] /posts`
