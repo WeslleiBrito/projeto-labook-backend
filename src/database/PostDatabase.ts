@@ -45,7 +45,7 @@ export class PostDatabase extends BaseDatabase{
         
         const {id, content} = input
 
-        await PostDatabase.connection(PostDatabase.TABLE_POSTS).update({content}).where({id})
+        await PostDatabase.connection(PostDatabase.TABLE_POSTS).update({content, update_at: new Date().toISOString()}).where({id})
     }
 
     public editLikeDislikePost = async (input: InputEditLikeDislike) => {
