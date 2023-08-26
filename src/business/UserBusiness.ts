@@ -5,9 +5,10 @@ import { ConflictError } from "../errors/ConflictError"
 import { NotFoundError } from "../errors/NotFoundError"
 import { UnauthorizedError } from "../errors/UnauthorizedError"
 import { User } from "../models/User"
+import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 import { TokenManager } from "../services/TokenManager"
-import { TokenPayload, USER_ROLES, UserDB } from "../types/type"
+import { USER_ROLES } from "../types/type"
 
 
 export class UserBusiness {
@@ -15,7 +16,8 @@ export class UserBusiness {
     constructor(
         private userDatabase: UserDatabase,
         private idGenerator: IdGenerator,
-        private tokenManager: TokenManager
+        private tokenManager: TokenManager,
+        private hashManager: HashManager
     ){}
     
     public signup = async (input: createUserInputDTO): Promise<createUserOutputDTO> => {
@@ -34,11 +36,13 @@ export class UserBusiness {
 
         const id = this.idGenerator.generate()
         
+        const hashPassword = await this.hashManager.hash(password)
+
         const newUser = new User(
             id,
             name,
             email,
-            password,
+            hashPassword,
             USER_ROLES.NORMAL,
             new Date().toISOString()
         )
@@ -74,8 +78,12 @@ export class UserBusiness {
             throw new NotFoundError('O email informado não existe!')
         }
 
-        if(password !== userDB.password){
-            throw new UnauthorizedError()
+        const hashedPassword = userDB.password
+
+        const isPasswordCorrect = await this.hashManager.compare(password, hashedPassword)
+
+        if(!isPasswordCorrect){
+            throw new UnauthorizedError("Email ou senha inválida.")
         }
 
         const output = this.tokenManager.createToken(
